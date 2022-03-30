@@ -2,15 +2,23 @@
 #include ".extend.Xresources"
 #endif
 
-
 ! ============
 !   Couleurs
 ! ============
+*.black-0: #141A1F
+*.black-1: #1A2128
+
+*.blue: #3890E9
+*.red: #EC5252
+*.purple: #A359ED
+*.yellow: #E0AF68
+*.green: #9ECE6A
+
 *secondary:  #444B6A
 *active:     #C0CAF5
 
-*.foreground:   #C0CAF5
-*.background:   #1A1B26
+*.foreground:   #A6B5C5
+*.background:   #141A1F
 *.cursorColor:  #C0CAF5
 *fading: 20
 *fadeColor: #5A638C
@@ -32,6 +40,9 @@
 *.color14:               #449DAB
 *.color15:               #9AA5CE
 
+! ============
+!    Autres
+! ============
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
