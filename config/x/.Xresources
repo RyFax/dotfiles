@@ -1,0 +1,47 @@
+#if __has_include(".extend.Xresources")
+#include ".extend.Xresources"
+#endif
+
+
+! ============
+!   Couleurs
+! ============
+*secondary:  #444B6A
+*active:     #C0CAF5
+
+*.foreground:   #C0CAF5
+*.background:   #1A1B26
+*.cursorColor:  #C0CAF5
+*fading: 20
+*fadeColor: #5A638C
+
+*.color0:                #6878A6
+*.color1:                #DB4B4B
+*.color2:                #9ECE6A
+*.color3:                #E0AF68
+*.color4:                #7AA2F7
+*.color5:                #BB9AF7
+*.color6:                #41A6B5
+*.color7:                #C0CAF5
+*.color8:                #5d6791
+*.color9:                #A6333F
+*.color10:               #9ECE6A
+*.color11:               #BBA461
+*.color12:               #6D91DE
+*.color13:               #9D7CD8
+*.color14:               #449DAB
+*.color15:               #9AA5CE
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+XTerm*background: #2b2b2b
+XTerm*foreground: #e7e7e7
+XTerm*pointerColor: #16A085
+XTerm*faceName: Fixed
+XTerm*faceSize: 11

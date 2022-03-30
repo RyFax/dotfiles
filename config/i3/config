@@ -1,0 +1,183 @@
+###############################
+#        CONFIGURATION        #
+###############################
+set $mod Mod4
+
+###############################
+#          APPARENCE          #
+###############################
+# Focus la fenêtre au survol
+focus_follows_mouse no
+
+# Police à utiliser
+font pango: SF Pro Display 10
+
+# Couleurs
+set_from_resource       $active       active
+set_from_resource       $inactive     secondary
+set_from_resource       $background   background
+set_from_resource       $foreground   foreground
+
+# class			border	    backgr.   	text	       indicat   child_border
+client.focused          $background $background $active        #F8CD7A   $active
+client.focused_inactive $background $background $inactive      #5A638C   $inactive
+client.unfocused        $background #16161E     $inactive      #34384D   $inactive
+client.urgent           $active     $active    	$background    #DB4B4B   $active
+client.placeholder      $background $background $foreground    #000000   $inactive
+client.background       $background
+
+
+###############################
+#         RACCOURCIS          #
+###############################
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec rofi -show drun
+
+
+# Changer de fenêtre
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Changer l'emplacemetn de la fenêtre
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize
+mode "resize" {
+        bindsym Left resize shrink width 5 px
+        bindsym Down resize grow height 5 px
+        bindsym Up resize shrink height 5 px
+        bindsym Right resize grow width 5 px
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+# Audio
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%              # +
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%              # -
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle    # mute
+bindsym XF86AudioPlay exec playerctl --all-players play-pause           # play / pause
+bindsym XF86AudioPause exec playerctl --all-players play-pause          # play / pause
+bindsym XF86AudioNext exec playerctl --all-players next                 # next
+bindsym XF86AudioPrev exec playerctl --all-players previous             # previous
+
+# Capture d'écran
+bindsym Print exec flameshot gui -s -c
+
+###############################
+#        WORKSPACES           #
+###############################
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $monitorLeft   DP-4
+set $monitorRight  HDMI-0
+
+# Ecran associé à chaque Workspace
+workspace $ws1 output $monitorRight
+workspace $ws2 output $monitorRight
+workspace $ws3 output $monitorRight
+workspace $ws4 output $monitorRight
+workspace $ws5 output $monitorLeft
+workspace $ws6 output $monitorLeft
+workspace $ws7 output $monitorLeft
+workspace $ws8 output $monitorLeft
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+
+# Workspace 1 (Ecran droite, Code)
+assign [class="jetbrains-idea|Code"] $ws1
+# Workspace 5 (Ecran gauche, Tchat)
+assign [class="discord"]    $ws5
+# Workspace 8 (Ecran gauche, Music)
+assign [class="Deezer"] $ws8
+for_window [class="Deezer"] move to workspace $ws8
+
+###############################
+#            MISC             #
+###############################
+# Applications au démarrage
+exec --no-startup-id nvidia-settings --load-config-only
+exec --no-startup-id discord
+
+# I3 Gaps
+for_window [class="^.*"] border pixel 2
+for_window [class=".*"] title_format "  %title"
+gaps inner 4
+smart_borders on
+smart_gaps on
+
+# Redémarre polybar & picomquand on redémarre i3
+exec_always --no-startup-id "killall polybar;polybar -r left & polybar -r right"
+exec_always --no-startup-id "picom"
