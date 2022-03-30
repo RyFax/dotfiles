@@ -180,4 +180,5 @@ smart_gaps on
 
 # Redémarre polybar & picomquand on redémarre i3
 exec_always --no-startup-id "killall polybar;polybar -r left & polybar -r right"
-exec_always --no-startup-id "picom"
+exec_always --no-startup-id "killall picom;picom"
+exec_always --no-startup-id "feh --bg-fill $HOME/Pictures/wallpaper.jpg"
